@@ -1,0 +1,54 @@
+<form class='form'>
+	<div class='form group'>
+		<label for='name'>Meal</label>
+		<input id='name' class='form-control' ng-model='mealForSave.name'/>
+
+		<label for='price'>Price</label>
+		<input id='price' class='form-control' ng-model='mealForSave.price'/>
+
+		<label for='mealSortSelect'>Sort</label>
+		<select class='form-control' name='mealSortSelect' id='mealSortSelect'
+      ng-options='option.name for option in sorts track by option.id'
+      ng-model='mealForSave.mealSort'></select>
+	</div>
+	<button class='btn btn-primary' ng-click='saveMeal()' ng-disabled='!mealForSave.name || !mealForSave.price || !mealForSave.mealSort'>Save
+	</button>
+
+</form>
+
+<form class='form'>
+	<div class='form-group'>
+		<label for='name'>Search</label>
+		<input id='name' class='form-control' ng-model='search.name'>
+	</div>
+		<button class='btn btn-primary' ng-click='findMeal()'>filter</button>
+		
+</form>
+
+<div class='btn-group pull-right'>
+	<button class='btn btn-primary' ng-disabled='currentPage == 0' ng-click='changePage(-1)'>prev
+	</button>
+	<button class='btn btn-primary' ng-disabled='meals.length < 10' ng-click='changePage(1)'>next</button>
+</div>
+
+
+<table class="table table-striped">
+	<thead>
+	  <tr>
+	    <th>Ime</th>
+	    <th>Cena</th>
+	    <th>Vrsta jela</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="meal in meals">
+	    <td>{{meal.name}}</td>
+	    <td>{{meal.price}}</td>
+	    <td>{{meal.mealSort.name}}</td>
+	    <td>
+	    	<button class="btn btn-danger" ng-click="deleteMeal(meal.id)">delete</button>
+			<button class="btn btn-primary" ng-click="editMeal(meal)">edit</button>
+		</td>
+	  </tr>
+	</tbody>
+</table>
