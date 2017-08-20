@@ -73,6 +73,9 @@ public class ApiMealController {
 		if(meal.getId() != id){
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		if(mealService.findOne(id) == null){
+			throw new EntityNotFoundException("Meal cannot be found.");
+		}
 		Meal edited = mealService.save(MealDTO.toMeal(meal));
 		
 		return new ResponseEntity<>(MealDTO.fromMeal(edited), HttpStatus.OK);
@@ -86,6 +89,7 @@ public class ApiMealController {
 		}
 		mealService.delete(id);
 	}
+	
 	
 		
 	
