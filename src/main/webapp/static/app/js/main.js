@@ -21,8 +21,9 @@ app.controller('mealCtrl', function ($scope, $http, $location){
 
 	var getMeals = function(){
 		var parameters = {};
+		parameters.page = $scope.currentPage;
 		if($scope.search && $scope.search.name){
-			parameters.name = $scope.search.name
+			parameters.name = $scope.search.name;
 		}
 		$http.get('api/meals', {params:parameters})
 			.success(function(data){
