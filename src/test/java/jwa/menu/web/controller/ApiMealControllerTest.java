@@ -109,7 +109,7 @@ public class ApiMealControllerTest {
 		ResponseEntity<MealDTO> result = mealController.getOne(bolonjeze.getId());
 
 		verify(mealService, times(1)).findOne(bolonjeze.getId());
-		assertEquals(bolonjeze.getId(), bolonjeze.getId());
+		assertEquals(result.getBody().getId(), bolonjeze.getId());
 		assertEquals(result.getStatusCode(), HttpStatus.OK);
 
 	}
@@ -121,10 +121,10 @@ public class ApiMealControllerTest {
 		ResponseEntity<MealDTO> result = mealController.addMeal(bolonjezeDTO);
 
 		verify(mealService, times(1)).save(any(Meal.class));
-		assertEquals(bolonjeze.getId(), bolonjeze.getId());
-		assertEquals(bolonjeze.getName(), bolonjeze.getName());
-		assertEquals(bolonjeze.getPrice(), bolonjeze.getPrice(), 0.001);
-		assertEquals(bolonjeze.getMealSort().getId(), bolonjeze.getMealSort().getId());
+		assertEquals(result.getBody().getId(), bolonjeze.getId());
+		assertEquals(result.getBody().getName(), bolonjeze.getName());
+		assertEquals(result.getBody().getPrice(), bolonjeze.getPrice(), 0.001);
+		assertEquals(result.getBody().getMealSort().getId(), bolonjeze.getMealSort().getId());
 		assertEquals(result.getStatusCode(), HttpStatus.CREATED);
 
 	}
